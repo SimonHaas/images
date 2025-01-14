@@ -11,7 +11,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository_owner }}/manim
+  IMAGE_NAME: ${{ github.repository }}/manim
 
 jobs:
   image:
