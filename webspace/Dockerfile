@@ -1,5 +1,3 @@
-FROM lscr.io/linuxserver/webtop:latest
+FROM lscr.io/linuxserver/webtop:ubuntu-xfce
 
-RUN apk update && \
-    apk add git firefox tailscale && \
-    mkdir /usr/local/sbin
+RUN curl -fsSL https://tailscale.com/install.sh | sh
