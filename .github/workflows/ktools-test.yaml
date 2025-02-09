@@ -11,7 +11,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}/ktools-test-b
+  IMAGE_NAME: ${{ github.repository }}/ktools-test-m
 
 jobs:
   image:
