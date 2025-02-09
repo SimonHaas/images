@@ -213,5 +213,6 @@ yes | unminimize
 # curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin
 
 echo 'Install minikube'
+echo https://storage.googleapis.com/minikube/releases/latest/minikube-linux-${BUILDARCH}
 curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-${BUILDARCH} && chmod +x minikube
 cp minikube /usr/local/bin && rm minikube

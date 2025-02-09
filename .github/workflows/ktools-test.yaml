@@ -11,22 +11,23 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}/ktools-test-m
+  IMAGE_NAME: ${{ github.repository }}/ktools-test
 
 jobs:
   image:
     permissions:
       contents: read
       packages: write
-    runs-on: ${{ matrix.runner }}
+    runs-on: ubuntu-latest
+    # runs-on: ${{ matrix.runner }}
     strategy:
       matrix:
         platform: [amd64, arm64]
-        include:
-          - platform: amd64
-            runner: ubuntu-latest
-          - platform: arm64
-            runner: macos-latest-xlarge
+        # include:
+        #   - platform: amd64
+        #     runner: ubuntu-latest
+        #   - platform: arm64
+        #     runner: macos-latest-xlarge
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4

@@ -1,7 +1,6 @@
 {
 	"name": "ktools-test",
-	// "image": "ghcr.io/simonhaas/images/ktools-test:main",
-	"image": "ghcr.io/simonhaas/images/ktools-test:main@sha256:7e55c96d54392f328e5f83e6cf7a8ffc98ea53168ce902eb75e1ea4dcfbfdc79",
+	"image": "ghcr.io/simonhaas/images/ktools-test:main",
 	//"dockerFile": "../ktools-test/Dockerfile",
 	"features": {
 		"ghcr.io/devcontainers/features/docker-in-docker:2": {}
