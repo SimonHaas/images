@@ -1,7 +1,7 @@
 {
-	"name": "ktools-docker",
+	"name": "ktools-test",
 	//"image": "ghcr.io/simonhaas/images/ktools:main",
-	"dockerFile": "../ktools/Dockerfile",
+	"dockerFile": "../ktools-test/Dockerfile",
 	"features": {
 		"ghcr.io/devcontainers/features/docker-in-docker:2": {}
 	},
