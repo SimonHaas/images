@@ -1,11 +1,4 @@
 {
-	// "name": "images",
-	// "image": "mcr.microsoft.com/devcontainers/base:jammy",
-	// "features": {
-	// 	"ghcr.io/devcontainers/features/docker-in-docker:2": {}
-	// }
-
-
 	"name": "ktools-docker",
 	//"image": "ghcr.io/simonhaas/images/ktools:main",
 	"dockerFile": "../ktools/Dockerfile",

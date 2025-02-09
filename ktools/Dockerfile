@@ -4,4 +4,4 @@ ENV DEBIAN_FRONTEND=noninteractive
 ARG BUILDARCH
 
 COPY build.sh .
-RUN bash ./build.sh
+RUN bash build.sh
