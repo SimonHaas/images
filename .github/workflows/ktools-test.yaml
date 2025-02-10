@@ -14,20 +14,53 @@ env:
   IMAGE_NAME: ${{ github.repository }}/ktools-test
 
 jobs:
-  image:
+  amd64:
     permissions:
       contents: read
       packages: write
-    # runs-on: ubuntu-latest
-    runs-on: ${{ matrix.runner }}
-    strategy:
-      matrix:
-        platform: [amd64, arm64]
-        include:
-          - platform: amd64
-            runner: ubuntu-latest
-          - platform: arm64
-            runner: macos-latest
+    runs-on: ubuntu-latest
+    # runs-on: ${{ matrix.runner }}
+    # strategy:
+    #   matrix:
+    #     platform: [amd64, arm64]
+    #     include:
+    #       - platform: amd64
+    #         runner: ubuntu-latest
+    #       - platform: arm64
+    #         runner: macos-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup docker (missing on MacOS)
+        if: runner.os == 'macos'
+        run: |
+          brew install docker
+          colima start
+      - name: Log in to the Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v6
+        with:
+          # provenance: false
+          platforms: ${{ matrix.platform }}
+          context: ktools-test
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+
+  arm64:
+    permissions:
+      contents: read
+      packages: write
+    runs-on: macos-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -45,7 +78,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
-          provenance: false
+          # provenance: false
           platforms: ${{ matrix.platform }}
           context: ktools-test
           push: true
