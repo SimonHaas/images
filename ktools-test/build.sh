@@ -3,7 +3,7 @@
 echo 'root:root' | chpasswd
 echo 'ubuntu:ubuntu' | chpasswd
 
-echo "BUILDARCH: ${BUILDARCH}"
+echo "BUILDARCH: ${TARGETARCH}"
 
 echo 'Setup base system'
 apt-get update && apt-get upgrade -y && apt-get install -y \
