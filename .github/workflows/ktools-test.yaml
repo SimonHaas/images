@@ -61,7 +61,7 @@ jobs:
         if: runner.os == 'macos'
         run: |
           brew install docker
-          colima start
+        #colima start
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Log in to the Container registry
