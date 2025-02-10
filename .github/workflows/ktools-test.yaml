@@ -40,7 +40,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
-          # provenance: false
+          provenance: false
           platforms: "linux/arm64,linux/amd64"
           context: ktools-test
           push: true
