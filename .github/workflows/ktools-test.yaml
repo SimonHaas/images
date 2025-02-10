@@ -57,12 +57,17 @@ jobs:
       packages: write
     runs-on: macos-latest
     steps:
-        # --cpu 3 --memory 6 --disk 100 --vm-type=qemu --mount-type=sshfs --dns=1.1.1.1
-      - name: Setup docker (missing on MacOS)
-        if: runner.os == 'macos'
+      - name: Select latest Xcode
+        run: "sudo xcode-select -s /Applications/Xcode_$XC_VERSION.app"
+      - name: Install deps
         run: |
-          brew install colima docker
-          colima start --cpu 3 --memory 6 --disk 100 --vm-type=qemu --mount-type=sshfs --dns=1.1.1.1
+          find /usr/local/bin -lname '*/Library/Frameworks/Python.framework/*' -delete
+          sudo rm -rf /Library/Frameworks/Python.framework/
+          brew update
+          brew install docker
+          brew install colima
+          sudo curl -L -o /opt/homebrew/Cellar/lima/0.22.0/bin/limactl https://github.com/mikekazakov/lima-nohvf/raw/master/limactl && sudo chmod +x /opt/homebrew/Cellar/lima/0.22.0/bin/limactl
+          colima start --network-address --arch arm64 --vm-type=qemu
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       - name: Checkout repository
