@@ -31,4 +31,5 @@ jobs:
           platforms: "linux/arm64,linux/amd64"
           context: https://github.com/romanz/electrs.git#${{ env.TAG }}
           push: true
-          tags: ${{ env.TAG }}
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}
+
