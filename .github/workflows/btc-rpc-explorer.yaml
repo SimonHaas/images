@@ -27,7 +27,7 @@ jobs:
       - id: lowercase-repo
         shell: pwsh
         run: |
-          "::set-output name=repository::$($env:REPOSITORY.ToLowerInvariant())"
+          "::set-output name=repository::$(${{ env.IMAGE_NAME }}.ToLowerInvariant())"
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
