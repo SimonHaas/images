@@ -26,6 +26,10 @@ jobs:
         uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
+      - id: lowercase-repo
+        uses: ASzc/change-string-case-action@v6
+        with:
+          string: ${{ env.IMAGE_NAME }}
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
@@ -33,3 +37,4 @@ jobs:
           platforms: "linux/arm64,linux/amd64"
           context: bfgminer
           push: true
+          tags: ${{ env.REGISTRY }}/${{ steps.lowercase-repo.outputs.lowercase }}:latest
