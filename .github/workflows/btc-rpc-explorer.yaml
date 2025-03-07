@@ -24,10 +24,14 @@ jobs:
         uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
+      # - id: lowercase-repo
+      #   shell: pwsh
+      #   run: |
+      #     "::set-output name=repository::$(${{ env.IMAGE_NAME }}.ToLowerInvariant())"
       - id: lowercase-repo
-        shell: pwsh
-        run: |
-          "::set-output name=repository::$(${{ env.IMAGE_NAME }}.ToLowerInvariant())"
+        uses: ASzc/change-string-case-action@v6
+        with:
+          string: ${{ env.IMAGE_NAME }}
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
@@ -36,4 +40,5 @@ jobs:
           context: https://github.com/janoside/btc-rpc-explorer.git#${{ env.TAG }}
           push: true
           # tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}
-          tags: ${{ env.REGISTRY }}/${{ steps.lowercase-repo.outputs.repository }}:${{ env.TAG }}
+          # tags: ${{ env.REGISTRY }}/${{ steps.lowercase-repo.outputs.repository }}:${{ env.TAG }}
+          tags: ${{ env.REGISTRY }}/${{ steps.lowercase-repo.outputs.lowercase }}:${{ env.TAG }}
