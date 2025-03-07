@@ -1,11 +1,12 @@
-name: Build bitcoin-core Image
+name: Build electrs Image
 
 on:
   workflow_dispatch:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}/bitcoin-core
+  IMAGE_NAME: ${{ github.repository }}/electrs
+  TAG: v0.10.9
 
 jobs:
   image:
@@ -28,5 +29,6 @@ jobs:
         with:
           provenance: false
           platforms: "linux/arm64,linux/amd64"
-          context: https://github.com/kylemanna/docker-bitcoind.git
+          context: https://github.com/romanz/electrs.git#${{ env.TAG }}
           push: true
+          tags: ${{ env.TAG }}
