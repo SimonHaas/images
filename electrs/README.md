@@ -1,4 +1,4 @@
-# electrs
+# btc-rpc-explorer
 
-Romanz privides a dockerfile for [electrs](https://github.com/romanz/electrs).
+Janoside privides a dockerfile for [btc-rpc-explorer](https://github.com/janoside/btc-rpc-explorer).
 I simply take it and build a version for arm64 and amd64. 
