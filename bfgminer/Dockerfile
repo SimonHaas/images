@@ -9,3 +9,7 @@ WORKDIR /bfgminer
 RUN ./autogen.sh
 RUN ./configure
 RUN make
+RUN apt-get update && \
+    apt-get install -y \
+        screen \
+    && rm -rf /var/lib/apt/lists/*
