@@ -2,11 +2,15 @@ name: Build btc-rpc-explorer Image
 
 on:
   workflow_dispatch:
+    inputs:
+      branch:
+        description: branch or tag of git repo to build
+        type: string
 
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}/btc-rpc-explorer
-  TAG: v3.4.0
+  #TAG: v3.4.0
 
 jobs:
   image:
@@ -33,6 +37,6 @@ jobs:
         with:
           provenance: false
           platforms: "linux/arm64,linux/amd64"
-          context: https://github.com/janoside/btc-rpc-explorer.git#${{ env.TAG }}
+          context: https://github.com/janoside/btc-rpc-explorer.git#${{ inputs.branch }}
           push: true
-          tags: ${{ env.REGISTRY }}/${{ steps.lowercase-repo.outputs.lowercase }}:${{ env.TAG }}
+          tags: ${{ env.REGISTRY }}/${{ steps.lowercase-repo.outputs.lowercase }}:${{ inputs.branch }}
