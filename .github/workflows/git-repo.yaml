@@ -39,8 +39,9 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
-          provenance: false
-          platforms: "linux/arm64,linux/amd64"
-          context: ${{ inputs.repo }}#${{ inputs.branch }}
-          push: true
-          tags: ${{ env.REGISTRY }}/${{ steps.lowercase-repo.outputs.lowercase }}:${{ inputs.branch }}
+            provenance: false
+            platforms: "linux/arm64,linux/amd64"
+            context: ${{ inputs.repo }}#${{ inputs.branch }}
+            push: true
+            tags: ${{ env.REGISTRY }}/${{ steps.lowercase-repo.outputs.lowercase }}:${{ inputs.branch }}
+            labels: org.opencontainers.image.source=${{ inputs.repo }}#${{ inputs.branch }}
