@@ -7,6 +7,8 @@ RUN apt-get update && \
     apt-get install -y \
         git \
         htop \
+        nano \
+        vi \
         ffmpeg \
         libportaudio2 \
         libportaudiocpp0 \
@@ -26,5 +28,8 @@ RUN apt-get update && \
 RUN pip install --upgrade "manim-voiceover[all]"
 #RUN pip install "manim-voiceover[all]"
 #RUN pip install TTS
+
+RUN echo 'root:root' | chpasswd && \
+    echo 'manimuser:manimuser' | chpasswd
 
 USER manimuser
