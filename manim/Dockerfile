@@ -8,7 +8,7 @@ RUN apt-get update && \
         git \
         htop \
         nano \
-        vi \
+        vim \
         ffmpeg \
         libportaudio2 \
         libportaudiocpp0 \
