@@ -35,14 +35,14 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: openai/codex
-
+          path: codex # Check out the repository into the 'codex' directory
+  
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
           provenance: false
           platforms: "linux/arm64,linux/amd64"
-          context: "{{defaultContext}}:codex/codex-cli"
-          #context: https://github.com/openai/codex.git:codex-cli
-          #file: codex-cli/Dockerfile
+          context: codex/codex-cli # Correctly set the context to the 'codex-cli' directory
+          file: codex/codex-cli/Dockerfile # Explicitly specify the Dockerfile path
           push: true
           tags: ${{ env.REGISTRY }}/${{ steps.lowercase-repo.outputs.lowercase }}:latest
