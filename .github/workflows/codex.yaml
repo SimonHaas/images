@@ -30,12 +30,19 @@ jobs:
         uses: ASzc/change-string-case-action@v6
         with:
           string: ${{ env.IMAGE_NAME }}
+
+      - name: Checkout codex
+        uses: actions/checkout@v4
+        with:
+          repository: https://github.com/openai/codex.git
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
           provenance: false
           platforms: "linux/arm64,linux/amd64"
-          context: https://github.com/openai/codex.git:codex-cli
+          context: "{{defaultContext}}:codex/codex-cli"
+          #context: https://github.com/openai/codex.git:codex-cli
           #file: codex-cli/Dockerfile
           push: true
           tags: ${{ env.REGISTRY }}/${{ steps.lowercase-repo.outputs.lowercase }}:latest
