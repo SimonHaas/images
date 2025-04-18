@@ -35,7 +35,7 @@ jobs:
         with:
           provenance: false
           platforms: "linux/arm64,linux/amd64"
-          context: https://github.com/openai/codex.git
-          file: codex-cli/Dockerfile
+          context: https://github.com/openai/codex.git:codex-cli
+          #file: codex-cli/Dockerfile
           push: true
           tags: ${{ env.REGISTRY }}/${{ steps.lowercase-repo.outputs.lowercase }}:latest
