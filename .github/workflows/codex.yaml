@@ -34,7 +34,7 @@ jobs:
       - name: Checkout codex
         uses: actions/checkout@v4
         with:
-          repository: https://github.com/openai/codex.git
+          repository: openai/codex
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
