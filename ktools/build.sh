@@ -25,9 +25,31 @@ apt-get update && apt-get upgrade -y && apt-get install -y \
     netavark \
     man-db \
     qrencode \
-    --no-install-recommends &&
-    rm -rf /var/lib/apt/lists/*
+    python3-dev=3.12.3* \
+    python3-pip=24.0* \
+    python3-venv=3.12.3* \
+    python3-virtualenv=20.25.0* \
+    pipx=1.4.3* \
+    packer=1.11.2* \
+    terraform=1.9.6* \
+    helm=3.16.1* \
+    age=1.1.1* \
+    jq=1.7.1* \
+    tmux=3.4* \
+    dnsutils=1:9.18.* \
+    net-tools=2.10* \
+    hashcat=6.2.6* \
+    podman=4.9.3* \
+    tree=2.1.1* \
+    ansible \
+    golang \
+    --no-install-recommends \
+    -y && rm -rf /var/lib/apt/lists/*
+
 yes | unminimize
+
+echo 'Install KubeDiagrams'
+pipx install KubeDiagrams
 
 echo 'Install kubectl'
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/${TARGETARCH}/kubectl"
@@ -56,29 +78,6 @@ curl -L -o hcloud.tar.gz https://github.com/hetznercloud/cli/releases/download/v
 mkdir hcloud
 tar -zxvf hcloud.tar.gz -C hcloud
 mv hcloud/hcloud /usr/local/bin/
-
-echo 'Install other apt programs'
-apt-get update && apt-get install \
-    python3-dev=3.12.3* \
-    python3-pip=24.0* \
-    python3-venv=3.12.3* \
-    python3-virtualenv=20.25.0* \
-    pipx=1.4.3* \
-    packer=1.11.2* \
-    terraform=1.9.6* \
-    helm=3.16.1* \
-    age=1.1.1* \
-    jq=1.7.1* \
-    tmux=3.4* \
-    dnsutils=1:9.18.28* \
-    net-tools=2.10* \
-    hashcat=6.2.6* \
-    podman=4.9.3* \
-    tree=2.1.1* \
-    ansible \
-    golang \
-    --no-install-recommends \
-    -y && rm -rf /var/lib/apt/lists/*
 
 echo 'Install tuf'
 go install github.com/theupdateframework/go-tuf/cmd/tuf@latest
