@@ -7,46 +7,62 @@ echo "TARGETARCH: ${TARGETARCH}"
 
 echo 'Setup base system'
 apt-get update && apt-get upgrade -y && apt-get install -y \
-    curl=8.5.0* \
-    wget=1.21.4* \
-    git=1:2.43.0* \
-    nano=7.2* \
-    htop=3.3.0* \
-    sudo=1.9.15* \
-    gpg=2.4.4* \
-    apt-transport-https=2.7.14* \
-    lsb-release=12.0-2 \
-    bash-completion=1:2.11-8 \
-    build-essential=12.10* \
-    iputils-ping=3:20240117-1build1 \
-    unminimize=0.2.1 \
-    ca-certificates=20240203 \
+    curl \
+    wget \
+    git \
+    nano \
+    htop \
+    sudo \
+    gpg \
+    apt-transport-https \
+    lsb-release \
+    bash-completion \
+    build-essential \
+    iputils-ping \
+    unminimize \
+    ca-certificates \
     ssh \
     netavark \
     man-db \
     qrencode \
-    python3-dev=3.12.3* \
-    python3-pip=24.0* \
-    python3-venv=3.12.3* \
-    python3-virtualenv=20.25.0* \
-    pipx=1.4.3* \
-    packer=1.11.2* \
-    terraform=1.9.6* \
-    helm=3.16.1* \
-    age=1.1.1* \
-    jq=1.7.1* \
-    tmux=3.4* \
-    dnsutils=1:9.18.* \
-    net-tools=2.10* \
-    hashcat=6.2.6* \
-    podman=4.9.3* \
-    tree=2.1.1* \
+    python3-dev \
+    python3-pip \
+    python3-venv \
+    python3-virtualenv \
+    pipx \
+    age \
+    jq \
+    tmux \
+    dnsutils \
+    net-tools \
+    hashcat \
+    podman \
+    tree \
     ansible \
     golang \
     --no-install-recommends \
     -y && rm -rf /var/lib/apt/lists/*
 
 yes | unminimize
+
+echo 'Add helm repository'
+curl https://baltocdn.com/helm/signing.asc | gpg --dearmor -o /usr/share/keyrings/helm.gpg >/dev/null
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | tee /etc/apt/sources.list.d/helm-stable-debian.list
+
+echo 'Add packer repository'
+curl https://apt.releases.hashicorp.com/gpg | gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/hashicorp.list
+
+echo 'Add terraform repository'
+curl https://apt.releases.hashicorp.com/gpg | gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg > /dev/null
+echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/hashicorp.list
+
+apt-get update && apt-get install -y \
+    helm \
+    packer \
+    terraform \
+    --no-install-recommends \
+    -y && rm -rf /var/lib/apt/lists/*
 
 echo 'Install KubeDiagrams'
 pipx install KubeDiagrams
@@ -61,10 +77,6 @@ echo 'Install helmfile'
 curl -L -o helmfile.tar.gz https://github.com/helmfile/helmfile/releases/download/v1.0.0-rc.2/helmfile_1.0.0-rc.2_linux_${TARGETARCH}.tar.gz
 tar -zxvf helmfile.tar.gz
 mv helmfile /usr/local/bin/
-
-echo 'Add helm repository'
-curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | tee /usr/share/keyrings/helm.gpg >/dev/null
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | tee /etc/apt/sources.list.d/helm-stable-debian.list
 
 echo 'Install talosctl'
 curl -sL https://talos.dev/install | sh
