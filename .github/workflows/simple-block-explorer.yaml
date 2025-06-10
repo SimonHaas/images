@@ -4,27 +4,27 @@ on:
   workflow_dispatch:
     inputs:
         MAIN_ENDPOINT_PROTOCOL:
-            description: http or https
+            description: MAIN_ENDPOINT_PROTOCOL
             default: http
             type: string
         MAIN_ENDPOINT_HOST:
-            description: 127.0.0.1
+            description: MAIN_ENDPOINT_HOST
             default: 127.0.0.1
             type: string
         MAIN_ENDPOINT_PORT:
-            description: '8332'
+            description: MAIN_ENDPOINT_PORT
             default: '8332'
             type: string
         TEST_ENDPOINT_PROTOCOL:
-            description: http or https
+            description: TEST_ENDPOINT_PROTOCOL
             default: http
             type: string
         TEST_ENDPOINT_HOST:
-            description: 127.0.0.1
+            description: TEST_ENDPOINT_HOST
             default: 127.0.0.1
             type: string
         TEST_ENDPOINT_PORT:
-            description: '18332'
+            description: TEST_ENDPOINT_PORT
             default: '18332'
             type: string
 
