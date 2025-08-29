@@ -226,3 +226,7 @@ curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -
 echo 'Install minikube'
 curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-${TARGETARCH} && chmod +x minikube
 cp minikube /usr/local/bin && rm minikube
+
+echo 'Install tea (gitea client)'
+curl -Lo tea https://gitea.com/gitea/tea/releases/download/v0.10.1/tea-0.10.1-linux-${TARGETARCH} && chmod +x tea
+cp tea /usr/local/bin && rm tea
