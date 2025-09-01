@@ -41,7 +41,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           provenance: false
-          platforms: ${{ matrix.platform }}
+          platforms: ${{ matrix.platform }} # Hier hat man das Problem, dass die Images getrennt voneinander hochgeladen werden und nur eines den Tag 'latest' bekommt, nur ein Image von einer Architektur. Bei einem Pull bekommt man also nicht automatisch das richtige Image für seine Architektur.
           context: https://github.com/RCasatta/fbbe.git
           file: docker/Dockerfile
           push: true
