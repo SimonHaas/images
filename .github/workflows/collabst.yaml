@@ -36,4 +36,4 @@ jobs:
           platforms: "linux/arm64,linux/amd64"
           context: https://github.com/collabst/collabst.git#${{ inputs.COMMIT }}
           push: true
-          tags: ${{ env.REGISTRY }}/${{ steps.lowercase-repo.outputs.lowercase }}:${{ inputs.TAG }}
+          tags: ${{ env.REGISTRY }}/${{ steps.lowercase-repo.outputs.lowercase }}:${{ inputs.COMMIT }}
