@@ -34,6 +34,6 @@ jobs:
         with:
           provenance: false
           platforms: "linux/arm64,linux/amd64"
-          context: https://github.com/collabst/collabst.git#${{ inputs.COMMIT }}
+          context: https://github.com/collabst/collabst.git#${{ inputs.COMMIT }}:backend/Dockerfile.prod
           push: true
           tags: ${{ env.REGISTRY }}/${{ steps.lowercase-repo.outputs.lowercase }}:${{ inputs.COMMIT }}
