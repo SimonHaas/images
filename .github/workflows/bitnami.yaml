@@ -44,7 +44,7 @@ jobs:
         with:
           provenance: false
           platforms: "linux/arm64,linux/amd64"
-          context: https://github.com/bitnami/containers.git
-          file: ${{ inputs.context }}/Dockerfile
+          context: https://github.com/bitnami/containers.git:${{ inputs.context }}
+          #file: ${{ inputs.context }}/Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
