@@ -41,7 +41,7 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
       - uses: actions/checkout@v7
         with:
-          repository: https://github.com/bitnami/containers.git
+          repository: bitnami/containers
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
