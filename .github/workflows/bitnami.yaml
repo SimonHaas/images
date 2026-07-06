@@ -49,6 +49,6 @@ jobs:
         with:
           provenance: false
           platforms: "linux/arm64,linux/amd64"
-          context: containers/${{ inputs.context }}
+          context: ${{ inputs.context }}
           push: true
           tags: ${{ steps.meta.outputs.tags }}
