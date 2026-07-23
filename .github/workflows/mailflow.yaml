@@ -1,18 +1,11 @@
-name: Build bitnami Image
+name: Build mailflow Image
 
 on:
   workflow_dispatch:
-    inputs:
-      context:
-        description: path in bitnami repo to build
-        type: string
-      name:
-        description: name of the image to build
-        type: string
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}/${{ inputs.name }}
+  IMAGE_NAME: ${{ github.repository }}/mailflow
 
 jobs:
   image:
@@ -34,19 +27,11 @@ jobs:
         uses: ASzc/change-string-case-action@v6
         with:
           string: ${{ env.IMAGE_NAME }}
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@v5
-        with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-      - uses: actions/checkout@v7
-        with:
-          repository: bitnami/containers
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
           provenance: false
           platforms: "linux/arm64,linux/amd64"
-          context: ${{ inputs.context }}
+          context: mailflow
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: ${{ env.REGISTRY }}/${{ steps.lowercase-repo.outputs.lowercase }}:latest
